@@ -1,0 +1,23 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "taskName": "Chrome",
+            "type": "process",
+            //"command": "chrome.exe",
+            "command": "google-chrome",
+            "windows": {
+                //"command": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+                "command": "/usr/bin/google-chrome"
+            },
+            "args": [
+                "${file}"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
