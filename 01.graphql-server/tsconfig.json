@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "lib": ["es2016", "esnext.asynciterable"], // 구독 기능 사용
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  }
+}
