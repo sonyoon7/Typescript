@@ -1,34 +1,32 @@
-import {
-  BaseEntity,
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn
-} from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, Entity, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Group } from './Group';
+import { Post } from './Post';
+import { Profile } from './Profile';
 
 @Entity()
 export class User extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
 
-  @Column({ unique: true })
-  email: string;
+    @PrimaryGeneratedColumn()
+    id: number;
 
-  @Column()
-  password: string;
+    @Column({unique: true})
+    email: string;
 
-  @Column({ type: "varchar", length: 120 })
-  name: string;
+    @Column()
+    password: string;
 
-  @Column({ type: "tinyint" })
-  age: number;
+    @Column({type: Date, nullable: true, default: null})
+    deletedAt: Date | null;
 
-  @Column({ type: Date, nullable: true, default: null })
-  deletedAt: Date | null;
+    @CreateDateColumn()
+    createdAt: Date;
 
-  @Column({ default: true })
-  enable: boolean;
+    @OneToOne(type => Profile, profile => profile.user)
+    profile: Profile
 
-  @CreateDateColumn()
-  createdAt: Date;
+    @OneToMany(type => Post, post => post.user)
+    posts: Post[];
+
+    @ManyToMany(type=>Group, group => group.users)
+    groups: Group[];
 }
