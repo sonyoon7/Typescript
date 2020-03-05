@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+  rdb:
+    container_name: rdb
+    image: mysql:5.7.27
+    restart: always
+    environment:
+      - MYSQL_USER=myname
+      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=test
+      - TZ=Asia/Seoul
+    ports:
+      - "3307:3306"
+    expose:
+      - "3307"
+    command:
+      [
+        "mysqld",
+        "--character-set-server=utf8mb4",
+        "--collation-server=utf8mb4_unicode_ci",
+      ]
+    volumes:
+      - "/c/data/mysql:/var/lib/mysql"
