@@ -4,18 +4,26 @@ import { User } from "./entity/User";
 
 createConnection()
   .then(async connection => {
-    console.log("Inserting a new user into the database...");
-    const user = new User();
-    user.firstName = "Timber";
-    user.lastName = "Saw";
-    user.age = 25;
-    await connection.manager.save(user);
-    console.log("Saved a new user with id: " + user.id);
+    console.log("새로운 사용자 추가");
+    const user = await User.create({
+      email: "test@mail.com",
+      password: "pass",
+      age: 20,
+      name: "홍길동"
+    }).save();
+    /*     
+    const user = new User()
+    user.email =""
+    user.password =""
+    user.age = 0
+    user.name = "sss"
+    */
 
-    console.log("Loading users from the database...");
-    const users = await connection.manager.find(User);
+    console.log("사용자 목록");
+    const users = await User.find();
     console.log("Loaded users: ", users);
 
-    console.log("Here you can setup and run express/koa/any other framework.");
+    console.log("접속 끊기");
+    await connection.close();
   })
   .catch(error => console.log(error));
