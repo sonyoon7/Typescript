@@ -1,11 +1,12 @@
-import * as TypeORM from 'typeorm';
+import * as TypeORM from "typeorm";
+import logger from "../../logConfig";
+let db: TypeORM.Connection;
 
-let db:TypeORM.Connection;
-
-beforeAll(async() => {
+beforeAll(async () => {
   try {
-    db =  await TypeORM.createConnection();
-  } catch(e){
+    db = await TypeORM.createConnection();
+    logger.logger.info("server start");
+  } catch (e) {
     console.log(e);
   }
 });
@@ -13,7 +14,7 @@ beforeAll(async() => {
 afterAll(async () => {
   try {
     await db.close();
-  } catch(e) {
+  } catch (e) {
     console.log(e);
   }
-})
+});
